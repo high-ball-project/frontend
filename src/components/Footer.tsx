@@ -1,4 +1,6 @@
 import { Box, Center, Flex, Grid } from "@chakra-ui/react";
+import Image from "@components/Image";
+import Text from "@components/Text";
 import { ComponentType, ReactNode } from "react";
 import { AiFillMail, AiFillPhone } from "react-icons/ai";
 import {
@@ -12,8 +14,6 @@ import {
   SiTwitter,
   SiYoutube,
 } from "react-icons/si";
-
-import { Image, Text } from "../index";
 
 const icons = {
   facebook: <SiFacebook />,

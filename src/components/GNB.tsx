@@ -1,15 +1,18 @@
 import { Box, Center, Flex, useBreakpointValue } from "@chakra-ui/react";
 import { BackgroundProps, LayoutProps, PositionProps } from "@chakra-ui/react";
+import Icon from "@components/Icon";
+import Image from "@components/Image";
+import Link from "@components/Link";
+import SkeletonBox from "@components/SkeletonBox";
+import Text from "@components/Text";
 import { Theme } from "@emotion/react";
+import { MenuData, MenuProps, SideMenuData } from "@interfaces/MenuData";
 import { Drawer, Dropdown, Spin } from "antd/es/index";
 import { ComponentType, useState } from "react";
 import { ReactNode } from "react";
 import { AiOutlineBars } from "react-icons/ai";
 import * as MDIcon from "react-icons/md";
 import { useWindowScroll } from "react-use";
-
-import { Icon, Image, Link, SkeletonBox, Text } from "../index";
-import { MenuData, MenuProps, SideMenuData } from "../interfaces/MenuData";
 
 export interface DefaultGNBProps {
   logo: ReactNode | string;

@@ -1,9 +1,13 @@
 import { Center, ColorProps, Flex, LayoutProps } from "@chakra-ui/react";
+import Button from "@components/Button";
+import Form from "@components/Form";
+import FormField, { Field } from "@components/FormField";
+import Image from "@components/Image";
+import Link from "@components/Link";
+import Text from "@components/Text";
 import { Theme as EmotionTheme } from "@emotion/react";
 import { notification } from "antd/es/index";
 import { ComponentType, ReactNode, useMemo, useState } from "react";
-
-import { Button, Field, Form, FormField, Image, Link, Text } from "../index";
 
 export interface SignupFormProps {
   width?: LayoutProps["width"];

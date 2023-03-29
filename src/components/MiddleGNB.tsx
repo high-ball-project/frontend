@@ -8,14 +8,17 @@ import {
   SpaceProps,
   useOutsideClick,
 } from "@chakra-ui/react";
+import Icon from "@components/Icon";
+import Link from "@components/Link";
+import Select from "@components/Select";
+import SkeletonBox from "@components/SkeletonBox";
+import Text from "@components/Text";
 import { Theme } from "@emotion/react";
+import { MenuData, MenuProps } from "@interfaces/MenuData";
 import { OptionProps, SelectProps } from "antd/es/select";
 import { ComponentType, ReactNode, useMemo, useRef } from "react";
 import * as MDIcon from "react-icons/md";
 import { useToggle } from "react-use";
-
-import { Icon, Link, Select, SkeletonBox, Text } from "../index";
-import { MenuData, MenuProps } from "../interfaces/MenuData";
 
 interface MiddleGNBMenuProps {
   menu?: MenuData[];

@@ -7,19 +7,14 @@ import {
   LayoutProps,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { Col, Row, Spin } from "@components/Element";
+import Empty from "@components/Empty";
+import Image from "@components/Image";
+import Link from "@components/Link";
+import SkeletonBox from "@components/SkeletonBox";
+import Text from "@components/Text";
 import { Theme } from "@emotion/react";
 import { ComponentType } from "react";
-
-import {
-  Col,
-  Empty,
-  Image,
-  Link,
-  Row,
-  SkeletonBox,
-  Spin,
-  Text,
-} from "../index";
 
 export type ListType = "grid" | "list";
 

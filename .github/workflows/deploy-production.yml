@@ -1,0 +1,83 @@
+name: Deploy Production
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy-s3:
+    name: Build and upload to s3
+    runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+    steps:
+      - name: Setup Target
+        run: |
+          if [ "${{github.base_ref}}" == "main" ] || [ "${{github.ref}}" == "refs/heads/main" ]; then
+            echo "DEPLOY PRODUCTION"
+            AWS_S3=${{ secrets.AWS_S3 }}
+            echo "S3=${{ secrets.AWS_S3 }}" >> $GITHUB_ENV
+            echo "CLOUD_FRONT=${{ secrets.AWS_CLOUD_FRONT }}" >> $GITHUB_ENV
+            echo "POSTFIX=" >> $GITHUB_ENV
+          else
+            echo "DEPLOY DEVELOPMENT"
+            echo "S3=${{ secrets.AWS_S3_DEV }}" >> $GITHUB_ENV
+            AWS_S3=${{ secrets.AWS_S3_DEV }}
+            echo "CLOUD_FRONT=${{ secrets.AWS_CLOUD_FRONT_DEV }}" >> $GITHUB_ENV
+            echo "POSTFIX=:dev" >> $GITHUB_ENV
+          fi
+
+          if [ -z ${AWS_S3} ]; then
+            echo "AWS_S3 is not define"
+            exit 1
+          fi
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@dev-five-git'
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 🧪 Test Project
+        run: pnpm test
+      - name: 🚀 Build Project
+        run: pnpm build${{env.POSTFIX}}
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          aws-region: ${{secrets.AWS_REGION}}
+      - name: 🧹 Clear S3
+        run: aws s3 rm s3://${{env.S3}} --recursive
+      - name: 🚀 Deploy S3 and reset CloudFront
+        run: |
+          aws s3 cp build s3://${{env.S3}} --recursive --acl public-read --exclude "*" --include "*.*"
+          aws s3 cp build s3://${{env.S3}} --recursive --acl public-read --content-type html --exclude "*.*"
+          aws cloudfront create-invalidation --distribution-id ${{env.CLOUD_FRONT}} --paths "/*"

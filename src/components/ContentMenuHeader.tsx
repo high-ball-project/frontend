@@ -1,10 +1,11 @@
-import { Box, Center, Show, Text } from "@chakra-ui/react";
+import { Box, Center, Show } from "@chakra-ui/react";
+import Button from "@components/Button";
+import Icon from "@components/Icon";
+import Text from "@components/Text";
 import Dropdown from "antd/es/dropdown/index";
 import { MenuItemType as _MenuItemType } from "antd/es/menu/hooks/useItems";
 import { ComponentType, ReactNode, useMemo } from "react";
 import * as MDIcon from "react-icons/md";
-
-import { Button, Icon } from "../index";
 
 type MenuItemType = Omit<
   _MenuItemType,

@@ -6,12 +6,13 @@ import {
   ColorProps,
   SpaceProps,
 } from "@chakra-ui/react";
+import Icon from "@components/Icon";
+import Link from "@components/Link";
+import Text from "@components/Text";
 import { Theme as EmotionTheme } from "@emotion/react";
 import Tooltip from "antd/es/tooltip";
 import { ComponentType, Key, ReactNode, useState } from "react";
 import * as MDIcon from "react-icons/md";
-
-import { Icon, Link, Text } from "../index";
 
 export interface CategoryMenuItemProps {
   info: CategoryMenuItemInfo;

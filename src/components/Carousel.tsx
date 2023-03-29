@@ -6,6 +6,11 @@ import {
   TextProps,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import Empty from "@components/Empty";
+import Image from "@components/Image";
+import Link from "@components/Link";
+import SkeletonBox from "@components/SkeletonBox";
+import Text from "@components/Text";
 import { Theme as EmotionTheme } from "@emotion/react";
 import {
   CarouselProps as _CarouselProps,
@@ -21,8 +26,6 @@ import {
   AiOutlineRight,
   AiOutlineUnorderedList,
 } from "react-icons/ai";
-
-import { Empty, Image, Link, SkeletonBox, Text } from "../index";
 
 interface CarouselData {
   src: string;

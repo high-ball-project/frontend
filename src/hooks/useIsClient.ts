@@ -1,6 +1,5 @@
+import _isClient from "@utils/isClient";
 import { useEffect, useState } from "react";
-
-import { isClient as _isClient } from "../index";
 
 /**
  * useIsClient

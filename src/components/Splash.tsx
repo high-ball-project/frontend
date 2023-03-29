@@ -1,7 +1,8 @@
 import { Center, Flex } from "@chakra-ui/react";
+import { Layout } from "@components/Element";
+import Image from "@components/Image";
+import Text from "@components/Text";
 import { useEffect, useState } from "react";
-
-import { Image, Layout, Text } from "../index";
 
 // 스플래시 페이지 로그인 정보 불러올 때 사용
 export interface SplashPageProps {

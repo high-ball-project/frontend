@@ -1,0 +1,64 @@
+name: Deploy Other Page
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+    if: false
+    name: Build and Upload to github page
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Page
+        run: |
+          if [ -z ${{ secrets.GH_DEPLOY_KEY }} ]; then
+            echo "GH_DEPLOY_KEY is not define"
+            exit 1
+          fi
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@dev-five-git'
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 🧪 Test Project
+        run: pnpm test
+      - name: 🚀 Build Project
+        run: pnpm build
+      - name: 🚀 Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.GH_DEPLOY_KEY }}
+          external_repository: ${{ github.repository }}-page
+          publish_branch: main
+          publish_dir: ./build

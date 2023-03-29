@@ -8,6 +8,9 @@ import {
   SpaceProps,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import Footer, { FooterProps } from "@components/Footer";
+import { MenuData } from "@interfaces/MenuData";
+import { DevfiveComponent } from "@interfaces/types";
 import {
   MonthPickerProps,
   RangePickerProps,
@@ -59,9 +62,6 @@ import { RadioButtonProps } from "antd/es/radio/radioButton";
 import { ComponentProps, FC, InputHTMLAttributes, ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 
-import { Footer, FooterProps } from "../";
-import { MenuData } from "../interfaces/MenuData";
-import { DevfiveComponent } from "../interfaces/types";
 import { GNBProps } from "./GNB";
 import GNB from "./GNB";
 import { MiddleGNBProps } from "./MiddleGNB";

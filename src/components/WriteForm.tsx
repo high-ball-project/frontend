@@ -1,8 +1,10 @@
 import { Flex } from "@chakra-ui/react";
+import ContentMenuHeader from "@components/ContentMenuHeader";
+import Editor from "@components/Editor";
+import Form from "@components/Form";
+import FormField from "@components/FormField";
 import { useCallback, useState } from "react";
 import { useSearchParam } from "react-use";
-
-import { ContentMenuHeader, Editor, Form, FormField } from "../index";
 
 export interface WriteFormProps {
   writeTitle?: string;

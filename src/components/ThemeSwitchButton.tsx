@@ -1,10 +1,9 @@
 import { Box, Center, ColorProps, useColorMode } from "@chakra-ui/react";
 import { TypographyProps } from "@chakra-ui/react";
+import Icon from "@components/Icon";
 import { Theme } from "@emotion/react";
 import { ComponentType } from "react";
 import * as MDIcon from "react-icons/md";
-
-import { Icon } from "../index";
 
 export interface ThemeSwitchButtonProps {
   lightIcon?: keyof typeof MDIcon;

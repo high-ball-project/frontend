@@ -1,4 +1,5 @@
 import { As, Center, chakra, ChakraProps } from "@chakra-ui/react";
+import Icon from "@components/Icon";
 import { ButtonProps, default as _Button } from "antd/es/button";
 import {
   forwardRef,
@@ -10,8 +11,6 @@ import {
   useState,
 } from "react";
 import * as MDIcon from "react-icons/md";
-
-import { Icon } from "../index";
 
 const __Button = chakra<As, ButtonProps>(_Button);
 

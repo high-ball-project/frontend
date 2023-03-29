@@ -5,6 +5,7 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { css, Global, Theme } from "@emotion/react";
+import { defaultTheme } from "@theme/theme";
 import {
   ConfigProvider,
   message,
@@ -24,7 +25,6 @@ import { ReactNode, useEffect, useMemo } from "react";
 import { HelmetProvider } from "react-helmet-async";
 
 import useAuth from "../store/useAuth";
-import { defaultTheme } from "../theme/theme";
 
 axios.defaults.baseURL =
   process.env.VITE_BASE_URL || process.env.NEXT_PUBLIC_BASE_URL;

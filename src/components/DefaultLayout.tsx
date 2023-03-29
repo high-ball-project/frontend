@@ -1,9 +1,10 @@
+import { Container, Layout } from "@components/Element";
+import Image from "@components/Image";
+import ThemeSwitchButton from "@components/ThemeSwitchButton";
 import { Modal } from "antd";
 import { Outlet } from "react-router-dom";
 
 import devfiveIcon from "/devfiveicon.svg";
-
-import { Container, Image, Layout, ThemeSwitchButton } from "../index";
 
 interface DefaultLayoutProps {
   topVisual?: boolean;

@@ -1,18 +1,14 @@
 import { Center, ColorProps, Flex, LayoutProps } from "@chakra-ui/react";
+import Button from "@components/Button";
+import Form from "@components/Form";
+import FormField, { Field } from "@components/FormField";
+import Icon from "@components/Icon";
+import Image from "@components/Image";
+import Link from "@components/Link";
+import Text from "@components/Text";
 import { Theme } from "@emotion/react";
 import { notification } from "antd";
 import { ComponentType, ReactNode, useMemo, useState } from "react";
-
-import {
-  Button,
-  Field,
-  Form,
-  FormField,
-  Icon,
-  Image,
-  Link,
-  Text,
-} from "../index";
 
 export interface FindFormProps {
   width?: LayoutProps["width"];

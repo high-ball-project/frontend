@@ -1,7 +1,9 @@
 import { Flex } from "@chakra-ui/react";
+import Button from "@components/Button";
+import { Input } from "@components/Element";
+import Form from "@components/Form";
+import { CheckField } from "@components/FormField";
 import { ComponentType, useState } from "react";
-
-import { Button, CheckField, Form, Input } from "../index";
 
 export interface CheckInputProps {
   info: CheckField;

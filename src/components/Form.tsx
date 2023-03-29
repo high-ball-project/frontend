@@ -1,4 +1,5 @@
 import { As, Box, chakra, ChakraComponent } from "@chakra-ui/react";
+import SkeletonBox from "@components/SkeletonBox";
 import { NamePath } from "antd/es/form/interface";
 import {
   Form as _Form,
@@ -6,8 +7,6 @@ import {
   FormProps as _FormProps,
 } from "antd/es/index";
 import { FC, useEffect, useRef, useState } from "react";
-
-import { SkeletonBox } from "../index";
 
 interface __FormProps extends _FormProps {
   dependKey?: string[] | "all";

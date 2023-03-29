@@ -1,9 +1,9 @@
 import { Center, ColorProps, Flex, LayoutProps } from "@chakra-ui/react";
+import Text from "@components/Text";
+import VideoPlayer, { VideoPlayerProps } from "@components/VideoPlayer";
 import { Theme } from "@emotion/react";
 import { ComponentType } from "react";
 import { ReactPlayerProps } from "react-player";
-
-import { Text, VideoPlayer, VideoPlayerProps } from "../index";
 
 export interface TopVisualProps {
   src?: string;

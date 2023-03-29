@@ -1,6 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
-
-import { ContentMenuHeader, Text } from "../index";
+import ContentMenuHeader from "@components/ContentMenuHeader";
+import Text from "@components/Text";
 
 export interface DetailFormProps {
   value: Record<"title" | "content" | "createdAt" | "category", any>;

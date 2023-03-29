@@ -1,8 +1,8 @@
 import { As, chakra } from "@chakra-ui/react";
+import { DevfiveComponent as ComponentType } from "@interfaces/types";
 import _Image, { ImageProps } from "antd/es/image";
 
 import fallbackImage from "../images/fallback.png";
-import { DevfiveComponent as ComponentType } from "../interfaces/types";
 
 const __Image = chakra<As, ImageProps>(_Image);
 

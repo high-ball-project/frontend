@@ -1,4 +1,10 @@
 import { Box, Center, ColorProps, Flex, LayoutProps } from "@chakra-ui/react";
+import Button from "@components/Button";
+import Form from "@components/Form";
+import Icon from "@components/Icon";
+import Image from "@components/Image";
+import Link from "@components/Link";
+import Text from "@components/Text";
 import { Theme } from "@emotion/react";
 import { Divider, FormItemProps } from "antd/es/index";
 import { ComponentType, ReactNode, useEffect, useMemo } from "react";
@@ -8,7 +14,6 @@ import appleIcon from "../images/appleIcon.svg";
 import googleIcon from "../images/googleIcon.svg";
 import kakaoIcon from "../images/kakaoIcon.svg";
 import naverIcon from "../images/naverIcon.svg";
-import { Button, Form, Icon, Image, Link, Text } from "../index";
 import { Input } from "./Element";
 
 type SnsType = "kakao" | "naver" | "google" | "apple";

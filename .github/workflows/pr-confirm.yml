@@ -1,0 +1,60 @@
+name: PR Confirm
+
+on:
+  pull_request:
+    branches: [ main, dev ]
+    types: [ opened, synchronize, reopened, closed ]
+  workflow_dispatch:
+  repository_dispatch:
+
+jobs:
+  deploy:
+    name: Build Confirm
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@dev-five-git'
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Install dependencies
+        run: pnpm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 🧪 Test Project
+        run: pnpm test
+      - name: 🚀 Build Project
+        run: pnpm build
+      - uses: afc163/surge-preview@v1
+        with:
+          surge_token: ${{ secrets.SURGE_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          dist: build
+          teardown: 'true'
+          build: |
+            pnpm install
+            pnpm build:dev
+            cp build/index.html build/200.html

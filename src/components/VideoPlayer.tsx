@@ -1,8 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
+import useIsClient from "@hooks/useIsClient";
 import { ComponentType, useCallback, useEffect, useRef, useState } from "react";
 import ReactPlayer, { ReactPlayerProps } from "react-player";
-
-import { useIsClient } from "../index";
 
 export interface VideoPlayerProps {
   full?: boolean;

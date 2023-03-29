@@ -1,9 +1,12 @@
 import { Flex } from "@chakra-ui/react";
+import CheckInput from "@components/CheckInput";
+import { Input } from "@components/Element";
+import Form from "@components/Form";
+import Select from "@components/Select";
+import Verification from "@components/Verification";
 import { FormItemProps } from "antd/es/form";
 import { SelectProps } from "antd/es/select";
 import { ComponentType } from "react";
-
-import { CheckInput, Form, Input, Select, Verification } from "../index";
 
 export interface InputField {
   type: "input" | "password";

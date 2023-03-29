@@ -1,9 +1,13 @@
 import { Center, Flex } from "@chakra-ui/react";
+import Button from "@components/Button";
+import { Input } from "@components/Element";
+import Form from "@components/Form";
+import { VerificationField } from "@components/FormField";
+import Icon from "@components/Icon";
+import Text from "@components/Text";
 import { notification } from "antd/es/index";
 import dayjs from "dayjs";
 import { ComponentType, useCallback, useEffect, useState } from "react";
-
-import { Button, Form, Icon, Input, Text, VerificationField } from "../index";
 
 export interface VerificationProps {
   info: VerificationField;

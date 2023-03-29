@@ -1,0 +1,90 @@
+name: Deploy Page
+
+on:
+  push:
+    branches: [ main, dev ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  packages: read
+  actions: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+    if: ${{ ((github.base_ref == 'main' || github.ref == 'refs/heads/main') && (github.event.head_commit.message == 'Initial commit') || (github.event.repository.name == 'devfive-front-system') || (github.event.repository.name == 'devfive-cms-system')) || github.base_ref == 'dev' || github.ref == 'refs/heads/dev' }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@dev-five-git'
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 🧪 Test Project
+        run: pnpm test
+      - name: 🚀 Prod Build
+        run: pnpm build
+        if: ${{ github.event.repository.name == 'devfive-front-system' }}
+      - name: 🚀 Dev Build
+        run: pnpm build:dev
+        if: ${{ github.event.repository.name != 'devfive-front-system' }}
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          # Upload entire repository
+          path: 'build'
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+
+        with:
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          aws-region: ${{secrets.AWS_REGION}}
+        if: ${{ github.event.repository.name != 'devfive-front-system' && github.event.repository.name != 'devfive-cms-system' }}
+      - name: 🚀 Reset Dev Cloudfront
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUD_FRONT_DEV }} --paths "/*"
+        if: ${{ github.event.repository.name != 'devfive-front-system' && github.event.repository.name != 'devfive-cms-system' }}

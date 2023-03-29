@@ -1,8 +1,7 @@
 import { chakra } from "@chakra-ui/react";
+import { DevfiveComponent } from "@interfaces/types";
 import { lazy, Suspense } from "react";
 import { ReactQuillProps } from "react-quill";
-
-import { DevfiveComponent } from "../interfaces/types";
 
 const Quill = lazy(() => import("./Quill"));
 

@@ -1,7 +1,7 @@
 import { Center } from "@chakra-ui/react";
+import Link from "@components/Link";
+import Text from "@components/Text";
 import { ComponentType, ReactNode } from "react";
-
-import { Link, Text } from "../index";
 
 export interface ContentHeaderProps {
   title: string | ReactNode;

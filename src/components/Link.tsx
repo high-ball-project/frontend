@@ -1,5 +1,7 @@
 import { ThemeTypings, useToken } from "@chakra-ui/react";
+import Text from "@components/Text";
 import { Theme } from "@emotion/react";
+import isNext from "@utils/isNext";
 import TypoLink from "antd/es/typography/Link";
 import * as nextRouter from "next/router";
 import {
@@ -11,8 +13,6 @@ import {
 } from "react";
 import * as reactRouter from "react-router-dom";
 import { HashLink, HashLinkProps } from "react-router-hash-link";
-
-import { isNext, Text } from "../index";
 
 export type LinkProps = {
   to?: string | null | number;
