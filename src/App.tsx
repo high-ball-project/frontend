@@ -13,7 +13,7 @@ export default function App() {
   return (
     <AppWrapper appTheme={defaultTheme}>
       <Splash companyName="devfive" imageSrc={devfiveIcon} show={!loaded} />
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <RootRoutes />
       </BrowserRouter>
     </AppWrapper>
