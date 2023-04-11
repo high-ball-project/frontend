@@ -10,7 +10,7 @@ import { Modal, Switch } from "antd";
 import dayjs from "dayjs";
 import { Key, useCallback, useState } from "react";
 
-const ListPage = () => {
+const NoticePage = () => {
   const [current, setCurrent, pageSize, setPageSize, search, setSearch] =
     useApiPagination({
       initialSearchParams: {
@@ -27,7 +27,7 @@ const ListPage = () => {
   }, [select]);
 
   return (
-    <Container mt="80px">
+    <Container mt="80px" pt="20px">
       <Row>
         <Col span={24}>
           <Flex justifyContent="end">
@@ -210,4 +210,4 @@ const ListPage = () => {
   );
 };
 
-export default ListPage;
+export default NoticePage;

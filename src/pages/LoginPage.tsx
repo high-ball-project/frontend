@@ -1,15 +1,19 @@
 import { Center } from "@chakra-ui/react";
+import Icon from "@components/Icon";
+import Link from "@components/Link";
 import LoginForm from "@components/LoginForm";
 import { notification } from "antd";
 import React from "react";
-
-import devfiveIcon from "/devfiveicon.svg";
 
 const LoginPage = () => (
   <Center h="100vh">
     <LoginForm
       findUrl="/find"
-      logo={devfiveIcon}
+      logo={
+        <Link to="/">
+          <Icon color="primary" icon="MdMotionPhotosAuto" size={120} />
+        </Link>
+      }
       onLogin={async (id, pw, snsType) => {
         await notification.success({
           message: id + " / " + pw + " / " + snsType,
@@ -18,7 +22,7 @@ const LoginPage = () => (
       signupUrl="/signup"
       sns={["kakao", "google", "naver", "apple"]}
       snsPosition="bottom"
-      title="데브파이브 계정으로 로그인"
+      title="하이볼 계정으로 로그인"
     />
   </Center>
 );

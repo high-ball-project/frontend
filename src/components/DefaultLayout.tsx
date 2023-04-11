@@ -1,20 +1,17 @@
 import { Container, Layout } from "@components/Element";
-import Image from "@components/Image";
+import Icon from "@components/Icon";
 import ThemeSwitchButton from "@components/ThemeSwitchButton";
-import { Modal } from "antd";
 import { Outlet } from "react-router-dom";
-
-import devfiveIcon from "/devfiveicon.svg";
 
 interface DefaultLayoutProps {
   topVisual?: boolean;
-  middleGNB?: boolean;
 }
 
-const DefaultLayout = ({ topVisual, middleGNB }: DefaultLayoutProps) => (
+const DefaultLayout = ({ topVisual }: DefaultLayoutProps) => (
   <Layout
+    bg="background"
     footer={{
-      snsTitle: "데브파이브의 다양한 소식을 만나보세요!",
+      snsTitle: "다양한 소식을 만나보세요!",
       sns: [
         {
           sns: "facebook",
@@ -54,105 +51,36 @@ const DefaultLayout = ({ topVisual, middleGNB }: DefaultLayoutProps) => (
         },
       ],
       middleText: [
-        "대표이사: 오정민",
-        "사업자등록번호: 123-45-67890",
-        "통신판매업신고번호: 제2021-서울강남-1234호",
-        "주소: 서울특별시 강남구 테헤란로 123",
-        "고객센터: 02-1234-5678",
-        "이메일: example@devfive.kr",
+        "팀 이름: 하이볼",
+        "팀원 : 임민택, 정대기, 이승준, 이강욱, 홍현기",
       ],
-      bottomSlide: ["과기부 상 이미지", "슬라이드 텍스트1", "슬라이드 텍스트2"],
-      logo: devfiveIcon,
-      copyRightCompany: "2021-2022 데브파이브",
+      logo: <Icon icon="MdMotionPhotosAuto" size={48} />,
+      copyRightCompany: "2021-2023 데브파이브",
     }}
     footerMt={4}
     gnb={{
       sideMenu: [
         { icon: <ThemeSwitchButton size="md" /> },
         { icon: "MdLogin", link: "/login" },
-        { icon: "MdBorderColor", link: "/write" },
-        { icon: "MdAutoStories", link: "/detail" },
-        { icon: "MdList", link: "/list" },
       ],
       position: "center",
-      logo: (
-        <Image
-          alt="logo"
-          maxH="64px"
-          maxW="64px"
-          preview={false}
-          src={devfiveIcon}
-        />
-      ),
+      logo: <Icon icon="MdMotionPhotosAuto" size={48} />,
       fixed: true,
       colorChange: true,
       changeHeight: "300px",
     }}
     menu={[
-      {
-        content: "메뉴 1",
-        link: "/",
-        subMenu: [
-          {
-            content: "메뉴 1-1",
-            link: "/",
-            subMenu: [
-              { content: "메뉴 1-1-1", link: "/" },
-              { content: "메뉴 1-1-2", link: "/" },
-              { content: "메뉴 1-1-3", link: "/" },
-              { content: "메뉴 1-1-4", link: "/" },
-            ],
-          },
-          { content: "메뉴 1-2", link: "/" },
-          { content: "메뉴 1-3", link: "/" },
-          { content: "메뉴 1-4", link: "/" },
-        ],
-      },
-      {
-        content: "메뉴 2",
-        link: "/",
-        subMenu: [
-          { content: "메뉴 2-1", link: "/" },
-          { content: "메뉴 2-2", link: "/" },
-          { content: "메뉴 2-3", link: "/" },
-          { content: "메뉴 2-4", link: "/" },
-        ],
-      },
-      { content: "메뉴 3", link: "/" },
-      {
-        content: "메뉴 4",
-        link: "/",
-        subMenu: [{ content: "메뉴 4-1", link: "/" }],
-      },
-      { content: "메뉴 5", link: "/" },
+      { content: "임파선 전이 예측", link: "/predict" },
+      { content: "공지사항", link: "/notice" },
+      { content: "공유 게시판", link: "/board" },
     ]}
-    middleGNB={
-      middleGNB
-        ? {
-            icon: "MdHome",
-            select: [0],
-            onIconClick: () => {
-              Modal.success({
-                title: "아이콘 테스크",
-                content: "아이콘 클릭 :>",
-                maskClosable: true,
-              });
-            },
-          }
-        : undefined
-    }
     topVisual={
       topVisual
         ? {
-            title: "테스트",
-            color: "primary",
-            video: {
-              full: true,
-              muted: true,
-              loop: true,
-              playing: true,
-              url: "https://www.youtube.com/watch?v=b1fTnxiMRwQ",
-            },
+            title: "하이볼",
+            color: "black",
+            src: "/images/top-visual.png",
+            height: "600px",
           }
         : undefined
     }
