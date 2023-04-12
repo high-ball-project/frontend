@@ -1,16 +1,13 @@
 import { Center, Flex } from "@chakra-ui/react";
-import Button from "@components/Button";
+import CardList from "@components/CardList";
 import ContentMenuHeader from "@components/ContentMenuHeader";
-import { Col, Container, Input, Row, Table } from "@components/Element";
+import { Col, Container, Input, Row } from "@components/Element";
 import Icon from "@components/Icon";
-import Link from "@components/Link";
 import Text from "@components/Text";
 import useApiPagination from "@hooks/useApiPagination";
-import { Modal, Switch } from "antd";
-import dayjs from "dayjs";
-import { Key, useCallback, useState } from "react";
 
 const BoardPage = () => {
+  // eslint-disable-next-line no-unused-vars
   const [current, setCurrent, pageSize, setPageSize, search, setSearch] =
     useApiPagination({
       initialSearchParams: {
@@ -19,12 +16,6 @@ const BoardPage = () => {
         orderBy: "createAt:desc",
       },
     });
-  const [access, setAccess] = useState(false);
-  const [select, setSelect] = useState<Key[]>([]);
-
-  const handleRemove = useCallback(() => {
-    Modal.info({ content: select.join(",") + "가 선택되었습니다" });
-  }, [select]);
 
   return (
     <Container mt="80px" pt="20px">
@@ -95,115 +86,137 @@ const BoardPage = () => {
           />
         </Col>
         <Col span={24}>
-          <Table
-            columns={[
+          <CardList
+            data={[
               {
-                title: "No.",
-                dataIndex: "key",
-                key: "key",
-                width: "40px",
+                title: "test",
+                src:
+                  (process.env.VITE_TEST_IMG_URL ||
+                    process.env.NEXT_PUBLIC_IMG_URL) +
+                  "/id/910/600/600.jpg?hmac=Zp8Nn8Qu1cNWtaS8s7cmehOAFEqWEFMLnkU2-5WAHmk",
+                subTitle: "서브 텍스트입니다.",
+                rightSubText: "2000.00.00",
+                leftSubText: "카테고리",
+                to: "http://localhost:8000",
               },
               {
-                title: "제목",
-                dataIndex: "title",
-                key: "title",
-                ellipsis: true,
-                width: "200px",
+                to: "https://localhost:3000",
+                title: "test",
+                src:
+                  (process.env.VITE_TEST_IMG_URL ||
+                    process.env.NEXT_PUBLIC_IMG_URL) +
+                  "/id/668/600/600.jpg?hmac=O56NInO155VoVXS-3AJpMqYsOUKP2ySgxBhj4TG0BeI",
+                leftSubText: "카테고리",
+                subTitle: "서브 텍스트입니다.",
               },
               {
-                title: "작성자",
-                dataIndex: "writer",
-                key: "writer",
-                width: "100px",
+                title: "test",
+                src:
+                  (process.env.VITE_TEST_IMG_URL ||
+                    process.env.NEXT_PUBLIC_IMG_URL) +
+                  "/id/973/600/600.jpg?hmac=rAwBeFfcx_1_w1QhUqciqL1FR7KbhmbAz2lDPXU67QQ",
+                subTitle: "서브 텍스트입니다.",
+                to: "https://localhost:3000",
               },
               {
-                title: "작성일",
-                dataIndex: "createdAt",
-                key: "createdAt",
-                width: "100px",
+                title: "test",
+                src:
+                  (process.env.VITE_TEST_IMG_URL ||
+                    process.env.NEXT_PUBLIC_IMG_URL) +
+                  "/id/809/600/600.jpg?hmac=oPfbXc9yNs4FPtUomYB31mZVdQQLNuxYyBK834O0M18",
+                subTitle: "서브 텍스트입니다.",
+                to: "https://localhost:3000",
+                leftSubText: "카테고리",
               },
               {
-                title: "조회수",
-                dataIndex: "viewCount",
-                key: "viewCount",
-                width: "80px",
+                title: "test",
+                src:
+                  (process.env.VITE_TEST_IMG_URL ||
+                    process.env.NEXT_PUBLIC_IMG_URL) +
+                  "/id/117/600/600.jpg?hmac=4rvSTVJTX5zXpivyGUXrLFp5b6tWMjs07OhHDbEAipU",
+                subTitle: "서브 텍스트입니다.",
+                to: "https://localhost:3000",
+              },
+              {
+                to: "https://localhost:3000",
+                title: "test",
+                src:
+                  (process.env.VITE_TEST_IMG_URL ||
+                    process.env.NEXT_PUBLIC_IMG_URL) +
+                  "/id/315/600/600.jpg?hmac=D4AjaTe7M0t_KzbCBk7zp43mHlPJ7fdsVh4RA5-pzV0",
+                leftSubText: "카테고리",
+                subTitle: "서브 텍스트입니다.",
+              },
+              {
+                title: "test",
+                src:
+                  (process.env.VITE_TEST_IMG_URL ||
+                    process.env.NEXT_PUBLIC_IMG_URL) +
+                  "/id/612/600/600.jpg?hmac=OOkE5Q9AbaUpjesuVwaU6diL0WTpH5UC-vUwZNA0uT8",
+                subTitle: "서브 텍스트입니다.",
+                to: "https://localhost:3000",
+              },
+              {
+                title: "test",
+                src:
+                  (process.env.VITE_TEST_IMG_URL ||
+                    process.env.NEXT_PUBLIC_IMG_URL) +
+                  "/id/679/600/600.jpg?hmac=DVfplgioCccJZC1SmZ3WsKHR_zNpz_hRdmhF8tfpKO0",
+                subTitle: "서브 텍스트입니다.",
+                to: "https://localhost:3000",
+                leftSubText: "카테고리",
+              },
+              {
+                title: "test",
+                src:
+                  (process.env.VITE_TEST_IMG_URL ||
+                    process.env.NEXT_PUBLIC_IMG_URL) +
+                  "/id/135/600/600.jpg?hmac=zc1gYrXLNKWsOehevhy77ljmz-BGxsYCuJ6biWtKoDE",
+                subTitle: "서브 텍스트입니다.",
+                to: "https://localhost:3000",
+              },
+              {
+                to: "https://localhost:3000",
+                title: "test",
+                src:
+                  (process.env.VITE_TEST_IMG_URL ||
+                    process.env.NEXT_PUBLIC_IMG_URL) +
+                  "/id/331/600/600.jpg?hmac=nYk7zP3ftmOJgqkNT5-f7GeJ2x6FftY0cLyM02pknW4",
+                leftSubText: "카테고리",
+                subTitle: "서브 텍스트입니다.",
+              },
+              {
+                title: "test",
+                src:
+                  (process.env.VITE_TEST_IMG_URL ||
+                    process.env.NEXT_PUBLIC_IMG_URL) +
+                  "/id/1014/600/600.jpg?hmac=B8s9k5dHO4Uij1dwCxTOhC3BRc6eFQUG8CxvIkYXFks",
+                subTitle: "서브 텍스트입니다.",
+                to: "https://localhost:3000",
+              },
+              {
+                title: "test",
+                src:
+                  (process.env.VITE_TEST_IMG_URL ||
+                    process.env.NEXT_PUBLIC_IMG_URL) +
+                  "/id/639/600/600.jpg?hmac=MIiW-nbHPB85Gj-HGVTV6CY2nkuUSWEguw8GR8V2JM4",
+                subTitle: "서브 텍스트입니다.",
+                to: "https://localhost:3000",
+                leftSubText: "카테고리",
+              },
+              {
+                title: "test",
+                src:
+                  (process.env.VITE_TEST_IMG_URL ||
+                    process.env.NEXT_PUBLIC_IMG_URL) +
+                  "/id/905/600/600.jpg?hmac=DvIKicBZ45DEZoZFwdZ62VbmaCwkK4Sv7rwYzUvwweU",
+                subTitle: "서브 텍스트입니다.",
+                to: "https://localhost:3000",
               },
             ]}
-            dataSource={[
-              {
-                key: 1,
-                title:
-                  "테스트1테스트1테스트1테스트1테스트1테스트1테스트1테스트1테스트1테스트1테스트1테스트1테스트1테스트1테스트1테스트1",
-                writer: "데브파이브",
-                createdAt: dayjs().format("YYYY-MM-DD"),
-                viewCount: 100,
-              },
-
-              {
-                key: 2,
-                title: "테스트2",
-                writer: "데브파이브",
-                createdAt: dayjs().format("YYYY-MM-DD"),
-                viewCount: 100,
-              },
-              {
-                key: 3,
-                title: "테스트3",
-                writer: "데브파이브",
-                createdAt: dayjs().format("YYYY-MM-DD"),
-                viewCount: 100,
-              },
-              {
-                key: 4,
-                title: "테스트4",
-                writer: "데브파이브",
-                createdAt: dayjs().format("YYYY-MM-DD"),
-                viewCount: 100,
-              },
-              {
-                key: 5,
-                title: "테스트5",
-                writer: "데브파이브",
-                createdAt: dayjs().format("YYYY-MM-DD"),
-                viewCount: 100,
-              },
-            ]}
-            overflowX={["scroll", "scroll", "initial", "initial", "initial"]}
-            pagination={{
-              current,
-              onChange: (page, pageSize) => {
-                setCurrent(page);
-                setPageSize(pageSize);
-              },
-              pageSize,
-            }}
-            rowSelection={
-              access
-                ? {
-                    type: "checkbox",
-                    onChange: setSelect,
-                  }
-                : undefined
-            }
+            numCol={[1, 2, 4]}
+            type="grid"
           />
-        </Col>
-        <Col span={24}>
-          <Flex justifyContent="space-between">
-            <Flex gap={2} my={2}>
-              <Text>관리자 권한 활성화 :</Text>
-              <Switch onChange={setAccess} />
-            </Flex>
-            {access && (
-              <Flex gap={2} my={2}>
-                <Button danger onClick={handleRemove}>
-                  삭제하기
-                </Button>
-                <Link to="/write">
-                  <Button>글쓰기</Button>
-                </Link>
-              </Flex>
-            )}
-          </Flex>
         </Col>
       </Row>
     </Container>
