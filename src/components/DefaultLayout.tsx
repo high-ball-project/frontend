@@ -55,7 +55,7 @@ const DefaultLayout = ({ topVisual }: DefaultLayoutProps) => (
         "팀원 : 임민택, 정대기, 이승준, 이강욱, 홍현기",
       ],
       logo: <Icon icon="MdMotionPhotosAuto" size={48} />,
-      copyRightCompany: "2021-2023 데브파이브",
+      copyRightCompany: "2021-2023 하이볼",
     }}
     footerMt={4}
     gnb={{
