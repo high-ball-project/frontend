@@ -80,7 +80,7 @@ const DefaultLayout = ({ topVisual }: DefaultLayoutProps) => (
             title: "하이볼",
             color: "black",
             src: "/images/top-visual.png",
-            height: "600px",
+            height: "100vh",
           }
         : undefined
     }
