@@ -1,19 +1,19 @@
 import AppWrapper from "@components/AppWrapper";
-import Splash from "@components/Splash";
-import useAuth from "@store/useAuth";
 import { defaultTheme } from "@theme/theme";
+import AOS from "aos";
+import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 
-import devfiveIcon from "../devfiveicon.svg";
 import RootRoutes from "./routes/RootRoute";
 
 export default function App() {
-  const { loaded } = useAuth();
+  useEffect(() => {
+    AOS.init();
+  });
 
   return (
     <AppWrapper appTheme={defaultTheme}>
-      <Splash companyName="devfive" imageSrc={devfiveIcon} show={!loaded} />
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <RootRoutes />
       </BrowserRouter>
     </AppWrapper>

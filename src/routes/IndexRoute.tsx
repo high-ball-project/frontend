@@ -6,15 +6,17 @@ import DefaultLayout from "../components/DefaultLayout";
 const WritePage = lazy(() => import("../pages/WritePage"));
 const DetailPage = lazy(() => import("../pages/DetailPage"));
 const IndexPage = lazy(() => import("../pages/IndexPage"));
-const ListPage = lazy(() => import("../pages/ListPage"));
+const BoardPage = lazy(() => import("../pages/BoardPage"));
+const NoticePage = lazy(() => import("../pages/NoticePage"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
 const FindPage = lazy(() => import("../pages/FindPage"));
+const PredictPage = lazy(() => import("../pages/PredictPage"));
 const SignupPage = lazy(() => import("../pages/SignupPage"));
 
 const IndexRoute: RouteObject[] = [
   {
     path: "/",
-    element: <DefaultLayout middleGNB topVisual />,
+    element: <DefaultLayout topVisual />,
     children: [
       {
         index: true,
@@ -35,8 +37,16 @@ const IndexRoute: RouteObject[] = [
         element: <DetailPage />,
       },
       {
-        path: "/list",
-        element: <ListPage />,
+        path: "/board",
+        element: <BoardPage />,
+      },
+      {
+        path: "/notice",
+        element: <NoticePage />,
+      },
+      {
+        path: "/predict",
+        element: <PredictPage />,
       },
     ],
   },
