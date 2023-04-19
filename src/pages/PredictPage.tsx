@@ -12,7 +12,9 @@ const PredictPage = () => {
   const [preview, setPreview] = useState("");
   const [form] = useForm();
 
-  const handleUpload = useCallback(async () => {}, []);
+  const handleUpload = useCallback(async () => {
+    console.log("업로드");
+  }, []);
 
   return (
     <Row mt="80px" pt="20px">
