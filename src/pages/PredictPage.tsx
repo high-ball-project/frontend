@@ -1,20 +1,33 @@
 import { Center, Flex } from "@chakra-ui/react";
 import Button from "@components/Button";
 import ContentHeader from "@components/ContentHeader";
-import { Col, DatePicker, Row } from "@components/Element";
+import { Col, DatePicker, Input, Row } from "@components/Element";
 import Select from "@components/Select";
 import Text from "@components/Text";
 import { UploadForm } from "@components/UploadForm";
-import { Form, InputNumber } from "antd";
+import { Form, InputNumber, notification } from "antd";
 import { useForm } from "antd/es/form/Form";
+import axios from "axios";
 import { useCallback } from "react";
 
 const PredictPage = () => {
   const [form] = useForm();
 
   const handleUpload = useCallback(async (v: any) => {
-    const value = { ...v, 수술연월일: v["수술연월일"].toISOString() };
-    console.log(value);
+    try {
+      const { data } = await axios.post<{ img_path: string; result: boolean }>(
+        v.requestUrl,
+        {
+          ...v,
+          img_path: "스트링",
+          수술연월일: v["수술연월일"].toISOString(),
+          requestUrl: undefined,
+        }
+      );
+      console.log(data);
+    } catch (e) {
+      notification.error({ message: "오류가 발생했습니다." });
+    }
   }, []);
 
   return (
@@ -347,6 +360,15 @@ const PredictPage = () => {
                 { value: 2, label: "BRCA2 mutation" },
               ]}
             />
+          </Form.Item>
+        </Col>
+        <Col span={24}>
+          <Form.Item
+            label="요청 URL"
+            name="requestUrl"
+            rules={[{ required: true }]}
+          >
+            <Input />
           </Form.Item>
         </Col>
         <Col span={24}>
