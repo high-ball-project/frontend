@@ -1,12 +1,10 @@
 import { Center, Flex } from "@chakra-ui/react";
-import Button from "@components/Button";
 import ContentMenuHeader from "@components/ContentMenuHeader";
 import { Col, Container, Input, Row, Table } from "@components/Element";
 import Icon from "@components/Icon";
-import Link from "@components/Link";
 import Text from "@components/Text";
 import useApiPagination from "@hooks/useApiPagination";
-import { Modal, Switch } from "antd";
+import { Modal } from "antd";
 import dayjs from "dayjs";
 import { Key, useCallback, useState } from "react";
 
@@ -186,24 +184,6 @@ const NoticePage = () => {
                 : undefined
             }
           />
-        </Col>
-        <Col span={24}>
-          <Flex justifyContent="space-between">
-            <Flex gap={2} my={2}>
-              <Text>관리자 권한 활성화 :</Text>
-              <Switch onChange={setAccess} />
-            </Flex>
-            {access && (
-              <Flex gap={2} my={2}>
-                <Button danger onClick={handleRemove}>
-                  삭제하기
-                </Button>
-                <Link to="/write">
-                  <Button>글쓰기</Button>
-                </Link>
-              </Flex>
-            )}
-          </Flex>
         </Col>
       </Row>
     </Container>

@@ -1,7 +1,7 @@
 import { Center, Flex } from "@chakra-ui/react";
 import Button from "@components/Button";
 import ContentHeader from "@components/ContentHeader";
-import { Col, DatePicker, Input, Row } from "@components/Element";
+import { Col, DatePicker, Row } from "@components/Element";
 import Select from "@components/Select";
 import Text from "@components/Text";
 import { UploadForm } from "@components/UploadForm";
@@ -9,26 +9,49 @@ import { Form, InputNumber, notification } from "antd";
 import { useForm } from "antd/es/form/Form";
 import axios from "axios";
 import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
 const PredictPage = () => {
   const [form] = useForm();
 
-  const handleUpload = useCallback(async (v: any) => {
-    try {
-      const { data } = await axios.post<{ img_path: string; result: boolean }>(
-        v.requestUrl,
-        {
+  const navigate = useNavigate();
+
+  const handleUpload = useCallback(
+    async (v: any) => {
+      if (!v.img_path.length) {
+        notification.error({ message: "이미지를 등록해주세요!" });
+        return;
+      }
+
+      try {
+        const formData = new FormData();
+
+        formData.append("file", v.img_path[0].originFileObj);
+        const { data: imgData } = await axios.post("/s3/imgupload", formData);
+
+        const value = {
           ...v,
-          img_path: "스트링",
+          img_path: imgData,
           수술연월일: v["수술연월일"].toISOString(),
-          requestUrl: undefined,
-        }
-      );
-      console.log(data);
-    } catch (e) {
-      notification.error({ message: "오류가 발생했습니다." });
-    }
-  }, []);
+        };
+
+        // const { data } = await axios.post<{
+        //   img_path: string;
+        //   result: boolean;
+        // }>("http://localhost:8883/asd", value);
+
+        const { data: uploadData } = await axios.post("/db/upload", {
+          ...value,
+          N_category: 1,
+        });
+
+        navigate("/result/" + uploadData);
+      } catch (e) {
+        notification.error({ message: "오류가 발생했습니다." });
+      }
+    },
+    [navigate]
+  );
 
   return (
     <Form form={form} layout="vertical" onFinish={handleUpload}>
@@ -360,15 +383,6 @@ const PredictPage = () => {
                 { value: 2, label: "BRCA2 mutation" },
               ]}
             />
-          </Form.Item>
-        </Col>
-        <Col span={24}>
-          <Form.Item
-            label="요청 URL"
-            name="requestUrl"
-            rules={[{ required: true }]}
-          >
-            <Input />
           </Form.Item>
         </Col>
         <Col span={24}>

@@ -1,3 +1,4 @@
+import ResultPage from "@pages/ResultPage";
 import { lazy } from "react";
 import { Navigate, RouteObject } from "react-router-dom";
 
@@ -33,7 +34,7 @@ const IndexRoute: RouteObject[] = [
         element: <WritePage />,
       },
       {
-        path: "/detail",
+        path: "/board/:id",
         element: <DetailPage />,
       },
       {
@@ -47,6 +48,10 @@ const IndexRoute: RouteObject[] = [
       {
         path: "/predict",
         element: <PredictPage />,
+      },
+      {
+        path: "/result/:id",
+        element: <ResultPage />,
       },
     ],
   },
