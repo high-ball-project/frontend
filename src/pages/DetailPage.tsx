@@ -52,7 +52,7 @@ const DetailPage = () => {
       />
       {data?.clinical_id && (
         <Flex justifyContent="end">
-          <Link to={"result" + data.clinical_id}>
+          <Link to={"/result/" + data?.clinical_id}>
             <Button>분석 결과 보기</Button>
           </Link>
         </Flex>
