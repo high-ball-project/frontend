@@ -35,7 +35,6 @@ const WritePage = () => {
                 title: v.title,
                 content: v.content,
                 category: 0,
-                clinical_id: clinicalId ?? undefined,
               });
               notification.success({
                 message: `${v.title}글이 성공적으로 수정되었습니다.. `,
