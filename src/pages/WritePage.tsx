@@ -40,6 +40,7 @@ const WritePage = () => {
               notification.success({
                 message: `${v.title}글이 성공적으로 수정되었습니다.. `,
               });
+              navigate("/board");
               return;
             }
             await axios.post("/board/add", {
