@@ -1,6 +1,9 @@
+import { Flex } from "@chakra-ui/react";
+import Button from "@components/Button";
 import DetailForm from "@components/DetailForm";
 import { Container } from "@components/Element";
 import Empty from "@components/Empty";
+import Link from "@components/Link";
 import useSearchSWR from "@hooks/useSearchSWR";
 import BoardGet from "@interfaces/BoardGet";
 import { Modal, notification } from "antd";
@@ -47,6 +50,13 @@ const DetailPage = () => {
           createdAt: dayjs(data?.createdAt).format("작성일: YYYY-MM-DD"),
         }}
       />
+      {data?.clinical_id && (
+        <Flex justifyContent="end">
+          <Link to={"result" + data.clinical_id}>
+            <Button>분석 결과 보기</Button>
+          </Link>
+        </Flex>
+      )}
     </Container>
   );
 };

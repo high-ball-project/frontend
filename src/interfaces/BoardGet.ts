@@ -8,4 +8,5 @@ export default interface BoardGet {
   title: string;
   updatedAt: string;
   writer: string;
+  clinical_id: number;
 }
