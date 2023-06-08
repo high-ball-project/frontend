@@ -49,14 +49,14 @@ const PredictPage = () => {
           수술연월일: v["수술연월일"].toISOString(),
         };
 
-        const { data } = await axios.post<{
-          img_path: string;
-          result: boolean;
-        }>("http://localhost:8883/asd", value);
+        const { data } = await axios.post<boolean>(
+          "http://localhost:8883/asd",
+          value
+        );
 
         const { data: uploadData } = await axios.post("/db/upload", {
           ...value,
-          N_category: data.result,
+          N_category: data,
         });
 
         setLoad(true);
