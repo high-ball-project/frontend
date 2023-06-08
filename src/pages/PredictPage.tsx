@@ -25,6 +25,7 @@ const PredictPage = () => {
     form.setFieldsValue({
       ...parseData,
       ["수술연월일"]: dayjs(parseData["수술연월일"]),
+      img_path: undefined,
     });
   }, [form]);
 
