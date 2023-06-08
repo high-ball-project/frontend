@@ -91,10 +91,7 @@ const BoardPage = () => {
           <CardList
             data={data?.map((v) => ({
               title: v.title,
-              src:
-                (process.env.VITE_TEST_IMG_URL ||
-                  process.env.NEXT_PUBLIC_IMG_URL) +
-                "/id/910/600/600.jpg?hmac=Zp8Nn8Qu1cNWtaS8s7cmehOAFEqWEFMLnkU2-5WAHmk",
+              src: "/images/board.png",
               rightSubText: dayjs(v.createdAt).format("YYYY.MM.DD"),
               leftSubText: "의료",
               to: "/board/" + v.id,

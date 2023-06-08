@@ -25,7 +25,7 @@ const PredictPage = () => {
       ...parseData,
       ["수술연월일"]: dayjs(parseData["수술연월일"]),
     });
-  }, []);
+  }, [form]);
 
   const handleUpload = useCallback(
     async (v: any) => {
