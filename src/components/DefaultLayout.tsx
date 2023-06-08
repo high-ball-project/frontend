@@ -77,8 +77,6 @@ const DefaultLayout = ({ topVisual }: DefaultLayoutProps) => (
     topVisual={
       topVisual
         ? {
-            title: "하이볼",
-            color: "black",
             src: "/images/top-visual.png",
             height: "100vh",
           }

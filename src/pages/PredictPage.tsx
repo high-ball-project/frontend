@@ -8,6 +8,7 @@ import { UploadForm } from "@components/UploadForm";
 import { Form, InputNumber, notification } from "antd";
 import { useForm } from "antd/es/form/Form";
 import axios from "axios";
+import dayjs from "dayjs";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -16,8 +17,19 @@ const PredictPage = () => {
 
   const navigate = useNavigate();
 
+  const loadData = useCallback(async () => {
+    const data = localStorage.getItem("current");
+    if (!data) return;
+    const parseData = JSON.parse(data);
+    form.setFieldsValue({
+      ...parseData,
+      ["수술연월일"]: dayjs(parseData["수술연월일"]),
+    });
+  }, []);
+
   const handleUpload = useCallback(
     async (v: any) => {
+      localStorage.setItem("current", JSON.stringify(v));
       if (!v.img_path.length) {
         notification.error({ message: "이미지를 등록해주세요!" });
         return;
@@ -407,10 +419,11 @@ const PredictPage = () => {
               fontWeight="bold"
               height="100%"
               maxWidth="360px"
+              onClick={loadData}
               p="16px"
               width="100%"
             >
-              최근 결과 보기
+              최근 데이터 불러오기
             </Button>
           </Center>
         </Col>
